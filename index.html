@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RNA Systems Biology Lab</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.6;
+            color: #1f2937;
+            background: #ffffff;
+            font-size: 16px;
+        }
+
+        /* Header - Minimalista */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e5e7eb;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1e40af;
+            text-decoration: none;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #6b7280;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+            font-size: 0.95rem;
+        }
+
+        nav a:hover {
+            color: #1e40af;
+        }
+
+        /* Hero - Minimalista */
+        .hero {
+            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+            padding: 8rem 0 6rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 400"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(30,64,175,0.03)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #1e40af;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.025em;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #6b7280;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e40af;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Section Base */
+        .section {
+            padding: 5rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: #1e40af;
+            margin-bottom: 1rem;
+            letter-spacing: -0.025em;
+        }
+
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: #6b7280;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Research Areas - Minimalista */
+        .research-section {
+            background: #f8fafc;
+        }
+
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .research-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .research-card:hover {
+            border-color: #1e40af;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .research-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 1rem;
+        }
+
+        .research-card p {
+            color: #6b7280;
+            line-height: 1.7;
+        }
+
+        .research-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Team Section - Minimalista */
+        .team-section {
+            background: white;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .team-members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .team-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .team-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: #f3f4f6;
+            border: 4px solid #1e40af;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1e40af;
+        }
+
+        .team-avatar-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #1e40af;
+            margin: 0 auto 1.5rem;
+        }
+
+        .team-name {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-name a {
+            color: #1e40af;
+            text-decoration: none;
+        }
+
+        .team-name a:hover {
+            text-decoration: underline;
+        }
+
+        .team-role {
+            color: #6b7280;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .team-bio {
+            color: #6b7280;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Team Members Grid */
+        .team-member-card {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .team-member-card:hover {
+            border-color: #1e40af;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .team-member-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #1e40af;
+            margin: 0 auto 1rem;
+        }
+
+        .team-member-placeholder {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #f3f4f6;
+            border: 3px solid #1e40af;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1e40af;
+        }
+
+        .team-member-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-member-role {
+            color: #6b7280;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .team-member-buttons {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .team-member-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.5rem 0.75rem;
+            border: 1px solid #1e40af;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .team-member-btn.primary {
+            background: #1e40af;
+            color: white;
+        }
+
+        .team-member-btn.primary:hover {
+            background: #1d4ed8;
+        }
+
+        .team-member-btn.secondary {
+            background: white;
+            color: #1e40af;
+        }
+
+        .team-member-btn.secondary:hover {
+            background: #f8fafc;
+        }
+
+        .section-divider {
+            border-top: 1px solid #e5e7eb;
+            margin: 3rem 0;
+            padding-top: 3rem;
+        }
+
+        .subsection-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        /* Publications - Minimalista */
+        .publications-section {
+            background: #f8fafc;
+        }
+
+        .publication-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .publication-item {
+            background: white;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            transition: all 0.2s ease;
+        }
+
+        .publication-item:hover {
+            border-color: #1e40af;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .publication-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+
+        .publication-title a {
+            color: #1e40af;
+            text-decoration: none;
+        }
+
+        .publication-title a:hover {
+            text-decoration: underline;
+        }
+
+        .publication-authors {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .publication-journal {
+            color: #9ca3af;
+            font-size: 0.85rem;
+            font-style: italic;
+        }
+
+        /* Contact Form - Minimalista */
+        .contact-section {
+            background: white;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .contact-form {
+            background: #f8fafc;
+            padding: 2.5rem;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .contact-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-button {
+            display: inline-block;
+            background: #1e40af;
+            color: white;
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            font-size: 0.95rem;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .contact-button:hover {
+            background: #1d4ed8;
+        }
+
+        .contact-info h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 1rem;
+            margin-top: 0.125rem;
+            color: #1e40af;
+        }
+
+        .contact-text {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        .contact-text a {
+            color: #1e40af;
+            text-decoration: none;
+        }
+
+        .contact-text a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer - Minimalista */
+        footer {
+            background: #1f2937;
+            color: #d1d5db;
+            padding: 3rem 0 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-text {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.25rem; }
+            .hero p { font-size: 1.1rem; }
+            .hero-stats { flex-direction: column; gap: 1.5rem; }
+            .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .research-grid { grid-template-columns: 1fr; }
+            .team-grid { grid-template-columns: 1fr; }
+            .team-members-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+            nav ul { display: none; }
+        }
+
+        /* Smooth animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#home" class="logo">RNA Systems Biology Lab</a>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#research">Research</a></li>
+                <li><a href="#team">Team</a></li>
+                <li><a href="#publications">Publications</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>RNA Systems Biology Lab</h1>
+            <p>Advancing our understanding of RNA regulation and gene expression through computational and experimental approaches at the Biosystems and Integrative Sciences Institute.</p>
+            
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">Publications</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">15+</span>
+                    <span class="stat-label">Research Projects</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">20+</span>
+                    <span class="stat-label">Team Members</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="research" class="section research-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Research Areas</h2>
+                <p class="section-subtitle">Our interdisciplinary research focuses on understanding RNA biology through computational and experimental approaches.</p>
+            </div>
+            
+            <div class="research-grid">
+                <div class="research-card fade-in">
+                    <h3>RNA Regulation</h3>
+                    <p>We investigate the molecular mechanisms that control gene expression at the RNA level, including post-transcriptional regulation, RNA-protein interactions, and alternative splicing.</p>
+                </div>
+                
+                <div class="research-card fade-in">
+                    <h3>Computational Biology</h3>
+                    <p>Our team develops and applies computational methods to analyze RNA-seq data, predict RNA structures, and model complex biological networks.</p>
+                </div>
+                
+                <div class="research-card fade-in">
+                    <h3>Systems Biology</h3>
+                    <p>We study how RNA networks integrate to control cellular functions and investigate how their disruption contributes to disease mechanisms.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="team" class="section team-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Team</h2>
+                <p class="section-subtitle">Meet the researchers dedicated to advancing RNA systems biology.</p>
+            </div>
+            
+            <div class="team-grid">
+                <div class="team-card fade-in">
+                    <img src="images/team/margarida.jpg" alt="Prof. Margarida Gama-Carvalho" class="team-avatar-img">
+                    <div class="team-name">
+                        <a href="margarida_profile.html" class="back-link">Prof. Margarida Gama-Carvalho</a>
+                    </div>
+                    <div class="team-role">Principal Investigator</div>
+                    <div class="team-bio">Associate Professor at FCUL and Principal Investigator of the Gene Expression and Regulation Group at BioISI.</div>
+                </div>
+                
+                <div class="team-card fade-in">
+                    <img src="images/team/francisco.jpg" alt="Prof. Francisco Pinto" class="team-avatar-img">
+                    <div class="team-name">
+                        <a href="francisco_profile.html" class="back-link">Prof. Francisco Pinto</a>
+                    </div>
+                    <div class="team-role">Principal Investigator</div>
+                    <div class="team-bio">Assistant Professor of Biochemistry at FCUL and researcher at the RNA Systems Biology group.</div>
+                </div>
+            </div>
+
+            <div class="section-divider">
+                <h3 class="subsection-title"></h3>
+                
+                <div class="team-members-grid">
+                    <div class="team-member-card fade-in">
+                        <img src="images/team/claudia_estima.jpg" alt="Cláudia Estima" class="team-member-avatar">
+                        <div class="team-member-name">Cláudia Estima</div>
+                        <div class="team-member-role">PhD Student</div>
+                        <div class="team-member-buttons">
+                            <a href="mailto:cfestima@fc.ul.pt" class="team-member-btn primary">
+                                ✉️ Email
+                            </a>
+                            <a href="https://www.cienciavitae.pt/2D12-E504-2155" class="team-member-btn secondary" target="_blank">
+                                 CV
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="team-member-card fade-in">
+                        <div class="team-member-placeholder">LM</div>
+                        <div class="team-member-name">Laura Mouga</div>
+                        <div class="team-member-role">MSc Student</div>
+                        <div class="team-member-buttons">
+                            <a href="mailto:lmmouga@fc.ul.pt" class="team-member-btn primary">
+                                ✉️ Email
+                            </a>
+                            <a href="https://www.cienciavitae.pt/portal/pt/BB10-39A4-307C" class="team-member-btn secondary" target="_blank">
+                                 CV
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="team-member-card fade-in">
+                        <img src="images/team/elisa_lunardon.jpg" alt="Elisa Lunardon" class="team-member-avatar">
+                        <div class="team-member-name">Elisa Lunardon</div>
+                        <div class="team-member-role">PhD Student</div>
+                        <div class="team-member-buttons">
+                            <a href="mailto:elisa.lunardon@studenti.units.it" class="team-member-btn primary">
+                                ✉️ Email
+                            </a>
+                            <a href="https://www.cienciavitae.pt3D1FA9F6-D11E" class="team-member-btn secondary" target="_blank">
+                                 CV
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="team-member-card fade-in">
+                        <img src="images/team/carolina_manaças.jpg" alt="Carolina Manaças" class="team-member-avatar">
+                        <div class="team-member-name">Carolina Manaças</div>
+                        <div class="team-member-role">MSc Student</div>
+                        <div class="team-member-buttons">
+                            <a href="mailto:cmanacas@fc.ul.pt" class="team-member-btn primary">
+                                ✉️ Email
+                            </a>
+                            <a href="https://www.cienciavitae.pt/031D-81D7-540F" class="team-member-btn secondary" target="_blank">
+                                 CV
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="team-member-card fade-in">
+                        <img src="images/team/joao_miranda.jpg" alt="João Miranda" class="team-member-avatar">
+                        <div class="team-member-name">João Miranda</div>
+                        <div class="team-member-role">PhD Student</div>
+                        <div class="team-member-buttons">
+                            <a href="mailto:jamiranda@fc.ul.pt" class="team-member-btn primary">
+                                ✉️ Email
+                            </a>
+                            <a href="https://www.cienciavitae.pt/B915-D668-DF0C" class="team-member-btn secondary" target="_blank">
+                                 CV
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="team-member-card fade-in">
+                        <img src="images/team/raquel_luta.jpg" alt="Raquel Luta" class="team-member-avatar">
+                        <div class="team-member-name">Raquel Luta</div>
+                        <div class="team-member-role">MSc Student</div>
+                        <div class="team-member-buttons">
+                            <a href="mailto:raluta@fc.ul.pt" class="team-member-btn primary">
+                                ✉️ Email
+                            </a>
+                            <a href="https://www.cienciavitae.pt/7610-D953-A10F" class="team-member-btn secondary" target="_blank">
+                                 CV
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="team-member-card fade-in">
+                        <img src="images/team/tomas_araujo.jpg" alt="Tomás Araújo" class="team-member-avatar">
+                        <div class="team-member-name">Tomás Araújo</div>
+                        <div class="team-member-role">MSc Student</div>
+                        <div class="team-member-buttons">
+                            <a href="mailto:tvaraujo@fc.ul.pt" class="team-member-btn primary">
+                                ✉️ Email
+                            </a>
+                            <a href="https://www.cienciavitae.ptA71D-9F17-085F" class="team-member-btn secondary" target="_blank">
+                                 CV
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="team-member-card fade-in">
+                        <img src="images/team/carolina_fernandes.jpg" alt="Carolina Fernandes" class="team-member-avatar">
+                        <div class="team-member-name">Carolina Fernandes</div>
+                        <div class="team-member-role">Early Stage Researcher/Research Trainee</div>
+                        <div class="team-member-buttons">
+                            <a href="mailto:cffernandes@fc.ul.pt" class="team-member-btn primary">
+                                ✉️ Email
+                            </a>
+                            <a href="https://www.cienciavitae.pt/931E-D521-2022" class="team-member-btn secondary" target="_blank">
+                                 CV
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="publications" class="section publications-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Featured Publications</h2>
+                <p class="section-subtitle">Latest research contributions from our laboratory.</p>
+            </div>
+            
+            <div class="publication-list">
+                <div class="publication-item fade-in">
+                    <div class="publication-title">
+                        <a href="https://doi.org/10.1000/example1" target="_blank">RNA-binding proteins in gene expression regulation: mechanisms and therapeutic implications</a>
+                    </div>
+                    <div class="publication-authors">Gama-Carvalho, M., Silva, A., Santos, R.</div>
+                    <div class="publication-journal">Journal of Molecular Biology • 2024</div>
+                </div>
+                
+                <div class="publication-item fade-in">
+                    <div class="publication-title">
+                        <a href="https://doi.org/10.1000/example2" target="_blank">Computational approaches to RNA structure prediction and functional annotation</a>
+                    </div>
+                    <div class="publication-authors">Pinto, F., Oliveira, J., Costa, M.</div>
+                    <div class="publication-journal">Bioinformatics • 2024</div>
+                </div>
+                
+                <div class="publication-item fade-in">
+                    <div class="publication-title">
+                        <a href="https://doi.org/10.1000/example3" target="_blank">Systems-level analysis of RNA regulatory networks in human cells</a>
+                    </div>
+                    <div class="publication-authors">Laboratory Team</div>
+                    <div class="publication-journal">Nature Communications • 2023</div>
+                </div>
+
+                <div class="publication-item fade-in">
+                    <div class="publication-title">
+                        <a href="https://doi.org/10.1000/example1" target="_blank">RNA-binding proteins in gene expression regulation: mechanisms and therapeutic implications</a>
+                    </div>
+                    <div class="publication-authors">Gama-Carvalho, M., Silva, A., Santos, R.</div>
+                    <div class="publication-journal">Journal of Molecular Biology • 2024</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section contact-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Contact Us</h2>
+                <p class="section-subtitle">Get in touch with our research team.</p>
+            </div>
+            
+            <div class="contact-grid">
+                <div class="contact-form">
+                    <h3>Contact us</h3>
+                    <br>
+                    <div class="contact-buttons">
+                        <a href="mailto:mgcarvalho@fc.ul.pt" class="contact-button">
+                            ✉️ Prof. Margarida Gama-Carvalho
+                        </a>
+                        <a href="mailto:frpinto@fc.ul.pt" class="contact-button">
+                            ✉️ Prof. Francisco Rodrigues Pinto
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="contact-info">
+                    <h3>Laboratory Information</h3>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div class="contact-text">
+                            BioISI - Instituto de Biosistemas e Ciências Integrativas<br>
+                            Faculdade de Ciências da Universidade de Lisboa<br>
+                            Campo Grande, 1749-016 Lisboa, Portugal
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">📄</div>
+                        <div class="contact-text">
+                            <a href="https://www.researchgate.net/lab/RNA-Systems-Biology-Lab-Margarida-Gama-Carvalho"target="_blank">Lab's ResearchGate</a><br>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">🌐</div>
+                        <div class="contact-text">
+                            <a href="https://bioisi.pt/laboratories/28" target="_blank">bioisi.pt</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <p class="footer-text">&copy; 2025 RNA Systems Biology Lab • BioISI • FCUL</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fade in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationDelay = '0.2s';
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
+                

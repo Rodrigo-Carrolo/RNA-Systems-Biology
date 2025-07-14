@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prof. Margarida Gama-Carvalho - RNA Systems Biology Lab</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.6;
+            color: #1f2937;
+            background: #ffffff;
+            font-size: 16px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e5e7eb;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1e40af;
+            text-decoration: none;
+        }
+
+        .back-link {
+            color: #6b7280;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: #1e40af;
+        }
+
+        /* Profile Section */
+        .profile-section {
+            padding: 8rem 0 4rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .profile-header {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 3rem;
+            align-items: start;
+            margin-bottom: 3rem;
+        }
+
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #1e40af;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-info h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1e40af;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-title {
+            font-size: 1.25rem;
+            color: #6b7280;
+            margin-bottom: 1rem;
+        }
+
+        .profile-affiliation {
+            font-size: 1rem;
+            color: #9ca3af;
+            margin-bottom: 2rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .contact-item a {
+            color: #1e40af;
+            text-decoration: none;
+        }
+
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+
+        /* Content Sections */
+        .content-section {
+            background: white;
+            border-radius: 8px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid #e5e7eb;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .section-content {
+            color: #6b7280;
+            line-height: 1.7;
+        }
+
+        .section-content p {
+            margin-bottom: 1rem;
+        }
+
+        .section-content ul {
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Research Interests */
+        .research-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .research-tag {
+            background: #f3f4f6;
+            color: #374151;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Publications */
+        .publication-item {
+            background: #f8fafc;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 6px;
+            border-left: 4px solid #1e40af;
+        }
+
+        .publication-title {
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 0.5rem;
+        }
+
+        .publication-title a {
+            color: #1e40af;
+            text-decoration: none;
+        }
+
+        .publication-title a:hover {
+            text-decoration: underline;
+        }
+
+        .publication-authors {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .publication-journal {
+            color: #9ca3af;
+            font-size: 0.85rem;
+            font-style: italic;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .profile-header {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+            
+            .profile-image {
+                margin: 0 auto;
+            }
+            
+            .profile-info h1 {
+                font-size: 2rem;
+            }
+            
+            .content-section {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">RNA Systems Biology Lab</a>
+            <a href="index.html" class="back-link">← Back to Main Site</a>
+        </nav>
+    </header>
+
+    <section class="profile-section">
+        <div class="container">
+            <div class="profile-header">
+                <img src="images/team/margarida.jpg" alt="Prof. Margarida Gama-Carvalho" class="profile-image">
+                <div class="profile-info">
+                    <h1>Prof. Margarida Gama-Carvalho</h1>
+                    <div class="profile-title">Principal Investigator & Assistant Professor</div>
+                    <div class="profile-affiliation">
+                        BioISI - Biosystems & Integrative Sciences Institute<br>
+                        Faculty of Sciences, University of Lisbon
+                    </div>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <span>✉️</span>
+                            <a href="mailto:mgcarvalho@fc.ul.pt">mgcarvalho@fc.ul.pt</a>
+                        </div>
+                        <div class="contact-item">
+                            <span>📍</span>
+                            <span>Campo Grande, Lisboa, Portugal</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h2 class="section-title">Academic Background</h2>
+                <div class="section-content">
+                    <p>Margarida Gama-Carvalho is an Assistant Professor at the Chemistry and Biochemistry Department of the Faculty of Sciences, University of Lisbon, where she serves as the Coordinator of the MSc program in Biochemistry and Biomedicine.</p>
+                    
+                    <p>She holds a PhD in Biomedical Sciences from the Faculty of Medicine, University of Lisbon (2003), and has been involved in undergraduate and post-graduate teaching for more than 25 years. Her academic journey began with a Biology degree from the Faculty of Sciences, University of Lisbon (1994), followed by Pedagogical Aptitude and Scientific Capacity examinations in Molecular and Cellular Biology at the Faculty of Medicine of Lisbon (2000).</p>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h2 class="section-title">Research Focus</h2>
+                <div class="section-content">
+                    <p>Her research focuses on understanding the molecular mechanisms that control gene expression at the RNA level, with particular emphasis on post-transcriptional regulation, RNA-protein interactions, and the role of RNA networks in cellular function and disease.</p>
+                    
+                    <p>The laboratory brings together computational and experimental approaches to characterize and model regulatory networks involved in the coordination of gene expression programs in vertebrates, with special interest in regulatory events occurring at the post-transcriptional level.</p>
+                </div>
+                <div class="research-tags">
+                    <span class="research-tag">RNA Biology</span>
+                    <span class="research-tag">Gene Expression Regulation</span>
+                    <span class="research-tag">Post-transcriptional Regulation</span>
+                    <span class="research-tag">RNA-Protein Interactions</span>
+                    <span class="research-tag">Transcriptomics</span>
+                    <span class="research-tag">Systems Biology</span>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h2 class="section-title">Research Leadership</h2>
+                <div class="section-content">
+                    <p>Since 2015, Margarida heads the RNA Systems Biology Laboratory of the Biosystems and Integrative Sciences Institute (BioISI) and co-coordinates its Genomics Facility. She is also a member of the executive board of BioISI and serves as the Principal Investigator of the Gene Expression and Regulation Group.</p>
+                    
+                    <p>During the COVID-19 pandemic, she took on the responsibility of technical direction of the Ciências Testing Center, demonstrating her commitment to public health and scientific service to the community.</p>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h2 class="section-title">Collaborative Research</h2>
+                <div class="section-content">
+                    <p>As co-Principal Investigator of the RNA Systems Biology Lab alongside Prof. Francisco Pinto, Margarida brings essential experimental expertise to the laboratory's interdisciplinary research approach.</p>
+                    
+                    <p>The collaboration combines experimental and computational approaches to characterize and model regulatory networks involved in the coordination of gene expression programs in vertebrates, with particular focus on post-transcriptional regulation and RNA-dependent mechanisms.</p>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h2 class="section-title">Projects</h2>
+                <div class="section-content">
+                    <p>Recent funding includes support from the Gilead Génese Program for RNA-based therapeutic development for HIV, where she serves as Principal Investigator. This project focuses on developing innovative RNA-based therapeutic approaches and molecular switches for HIV treatment.</p>
+                    
+                    <p>Her current research focuses on RNA-dependent mechanisms and regulatory networks, with a special interest on processes regulating the immune response, host-pathogen interaction, and neuronal function, addressed using a wide range of molecular and cell biology, transcriptomics and computational approaches.</p>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h2 class="section-title">Publications & Links</h2>
+                <div class="section-content">
+                    <p>Margarida Gama-Carvalho has authored over 50 publications in refereed journals, receiving approximately 1,348 citations in total. Her work has been published in high-impact journals focusing on RNA biology, gene regulation, and systems biology.</p>
+                    
+                    <div class="publication-item">
+                        <div class="publication-title">
+                            <a href="https://scholar.google.com/citations?user=SUpE2GIAAAAJ&hl=en" target="_blank">Google Scholar Profile</a>
+                        </div>
+                        <div class="publication-authors">Margarida Gama-Carvalho</div>
+                        <div class="publication-journal">Cited by 1,348 publications</div>
+                    </div>
+                    
+                    <div class="publication-item">
+                        <div class="publication-title">
+                            <a href="https://www.researchgate.net/profile/Margarida-Gama-Carvalho" target="_blank">RNA Systems Biology Lab</a>
+                        </div>
+                        <div class="publication-authors">ResearchGate Profile</div>
+                        <div class="publication-journal">Complete research portfolio</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

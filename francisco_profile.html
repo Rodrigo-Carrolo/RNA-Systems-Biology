@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prof. Francisco Pinto - RNA Systems Biology Lab</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.6;
+            color: #1f2937;
+            background: #ffffff;
+            font-size: 16px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e5e7eb;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1e40af;
+            text-decoration: none;
+        }
+
+        .back-link {
+            color: #6b7280;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: #1e40af;
+        }
+
+        /* Profile Section */
+        .profile-section {
+            padding: 8rem 0 4rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .profile-header {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 3rem;
+            align-items: start;
+            margin-bottom: 3rem;
+        }
+
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #1e40af;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-info h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1e40af;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-title {
+            font-size: 1.25rem;
+            color: #6b7280;
+            margin-bottom: 1rem;
+        }
+
+        .profile-affiliation {
+            font-size: 1rem;
+            color: #9ca3af;
+            margin-bottom: 2rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .contact-item a {
+            color: #1e40af;
+            text-decoration: none;
+        }
+
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+
+        /* Content Sections */
+        .content-section {
+            background: white;
+            border-radius: 8px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid #e5e7eb;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .section-content {
+            color: #6b7280;
+            line-height: 1.7;
+        }
+
+        .section-content p {
+            margin-bottom: 1rem;
+        }
+
+        .section-content ul {
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Research Interests */
+        .research-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .research-tag {
+            background: #f3f4f6;
+            color: #374151;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Publications */
+        .publication-item {
+            background: #f8fafc;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 6px;
+            border-left: 4px solid #1e40af;
+        }
+
+        .publication-title {
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 0.5rem;
+        }
+
+        .publication-title a {
+            color: #1e40af;
+            text-decoration: none;
+        }
+
+        .publication-title a:hover {
+            text-decoration: underline;
+        }
+
+        .publication-authors {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .publication-journal {
+            color: #9ca3af;
+            font-size: 0.85rem;
+            font-style: italic;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .profile-header {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+            
+            .profile-image {
+                margin: 0 auto;
+            }
+            
+            .profile-info h1 {
+                font-size: 2rem;
+            }
+            
+            .content-section {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">RNA Systems Biology Lab</a>
+            <a href="index.html" class="back-link">← Back to Main Site</a>
+        </nav>
+    </header>
+
+    <section class="profile-section">
+        <div class="container">
+            <div class="profile-header">
+                <img src="images/team/francisco.jpg" alt="Prof. Francisco Pinto" class="profile-image">
+                <div class="profile-info">
+                    <h1>Prof. Francisco Rodrigues Pinto</h1>
+                    <div class="profile-title">Principal Investigator & Assistant Professor</div>
+                    <div class="profile-affiliation">
+                        BioISI - Biosystems & Integrative Sciences Institute<br>
+                        Faculty of Sciences, University of Lisbon
+                    </div>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <span>✉️</span>
+                            <a href="mailto:frpinto@fc.ul.pt">frpinto@fc.ul.pt</a>
+                        </div>
+                        <div class="contact-item">
+                            <span>🌐</span>
+                            <a href="https://frpinto.github.io/" target="_blank">frpinto.github.io</a>
+                        </div>
+                        <div class="contact-item">
+                            <span>📍</span>
+                            <span>Campo Grande, Lisboa, Portugal</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h2 class="section-title">Academic Background</h2>
+                <div class="section-content">
+                    <p>Francisco Rodrigues Pinto is an Assistant Professor of Biochemistry at the Faculty of Sciences, University of Lisbon, and a researcher at the RNA Systems Biology group (Gama & Pinto Lab) within the Gene Expression Regulation unit of the Biosystems and Integrated Sciences Institute (BioISI).</p>
+                    
+                    <p>He holds a PhD in Biochemistry and has established himself as a leading researcher in computational biology, bringing mathematical and computational expertise to understand complex biological systems.</p>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h2 class="section-title">Research Focus</h2>
+                <div class="section-content">
+                    <p>Francisco's research interests focus on networks of biological molecules that regulate cellular processes. To understand the structure and function of these networks, in health and disease states, he uses and develops mathematical and computational methods.</p>
+                    
+                    <p>His work is particularly centered on computational biology approaches to analyze complex biological data, with emphasis on network analysis, systems biology, and the development of novel computational tools for understanding gene regulation and RNA biology.</p>
+                </div>
+                <div class="research-tags">
+                    <span class="research-tag">Computational Biology</span>
+                    <span class="research-tag">Systems Biology</span>
+                    <span class="research-tag">Network Analysis</span>
+                    <span class="research-tag">Mathematical Modeling</span>
+                    <span class="research-tag">Gene Regulation</span>
+                    <span class="research-tag">Bioinformatics</span>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h2 class="section-title">Research Contributions</h2>
+                <div class="section-content">
+                    <p>Francisco has made significant contributions to the field of computational biology, particularly in the development of methods for analyzing biological networks. His work includes the development of algorithms for network module detection and analysis of network properties.</p>
+                    
+                    <p>One of his notable contributions includes work on "Searching the overlap between network modules with specific betweenness (S2B) and its application", which represents innovative approaches to understanding complex biological networks.</p>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h2 class="section-title">Collaborative Research</h2>
+                <div class="section-content">
+                    <p>As co-Principal Investigator of the RNA Systems Biology Lab alongside Prof. Margarida Gama-Carvalho, Francisco brings essential computational expertise to the laboratory's interdisciplinary research approach.</p>
+                    
+                    <p>The collaboration combines experimental and computational approaches to characterize and model regulatory networks involved in the coordination of gene expression programs in vertebrates, with particular focus on post-transcriptional regulation.</p>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h2 class="section-title">Teaching & Mentoring</h2>
+                <div class="section-content">
+                    <p>Francisco is actively involved in teaching biochemistry and supervising graduate students in computational biology and bioinformatics. His teaching focuses on bridging the gap between mathematical concepts and biological applications.</p>
+                    
+                    <p>He mentors PhD students and postdoctoral researchers in computational approaches to biological problems, contributing to the training of the next generation of computational biologists.</p>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h2 class="section-title">Publications & Links</h2>
+                <div class="section-content">
+                    <p>Francisco has contributed to numerous publications in computational biology and systems biology. His work is available through various academic platforms and his personal website.</p>
+                    
+                    <div class="publication-item">
+                        <div class="publication-title">
+                            <a href="https://frpinto.github.io/" target="_blank">Personal Website & Research</a>
+                        </div>
+                        <div class="publication-authors">Francisco Rodrigues Pinto</div>
+                        <div class="publication-journal">Complete research portfolio and publications</div>
+                    </div>
+                    
+                    <div class="publication-item">
+                        <div class="publication-title">
+                            <a href="https://www.researchgate.net/profile/Francisco-Pinto-19" target="_blank">ResearchGate Profile</a>
+                        </div>
+                        <div class="publication-authors">Francisco Pinto</div>
+                        <div class="publication-journal">Academic publications and research contributions</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
