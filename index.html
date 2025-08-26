@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RNA Systems Biology Lab</title>
+    <meta name="description" content="O RNA Systems Biology Lab investiga redes de RNA, regulação genética e biologia de sistemas, integrando ciência computacional e experimental.">
+    <meta name="keywords" content="RNA, Systems Biology, RNA networks, Gene Regulation, Computational Biology, Lab">
+    <title>RNA Systems Biology Lab | Investigação em Biologia de Sistemas</title>
     <style>
         * {
             margin: 0;
@@ -65,13 +67,16 @@
             color: #1e40af;
         }
 
-        /* Hero - Minimalista */
+        /* Hero - RNA background with overlay */
         .hero {
-            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+            background-image: url("images/team/rna.jpg");
+            background-size: cover;
+            background-position: center;
             padding: 8rem 0 6rem;
             text-align: center;
             position: relative;
             overflow: hidden;
+            min-height: 70vh;
         }
 
         .hero::before {
@@ -81,7 +86,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 400"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(30,64,175,0.03)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+            background: rgba(0, 0, 0, 0.4);
             z-index: 1;
         }
 
@@ -91,6 +96,11 @@
             padding: 0 2rem;
             position: relative;
             z-index: 2;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 3rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         }
 
         .hero h1 {
@@ -554,6 +564,7 @@
             .hero h1 { font-size: 2.25rem; }
             .hero p { font-size: 1.1rem; }
             .hero-stats { flex-direction: column; gap: 1.5rem; }
+            .hero-content { padding: 2rem; }
             .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
             .research-grid { grid-template-columns: 1fr; }
             .team-grid { grid-template-columns: 1fr; }
@@ -678,7 +689,7 @@
                                 ✉️ Email
                             </a>
                             <a href="https://www.cienciavitae.pt/2D12-E504-2155" class="team-member-btn secondary" target="_blank">
-                                 CV
+                                📄 CV
                             </a>
                         </div>
                     </div>
@@ -692,7 +703,7 @@
                                 ✉️ Email
                             </a>
                             <a href="https://www.cienciavitae.pt/portal/pt/BB10-39A4-307C" class="team-member-btn secondary" target="_blank">
-                                 CV
+                                📄 CV
                             </a>
                         </div>
                     </div>
@@ -705,8 +716,8 @@
                             <a href="mailto:elisa.lunardon@studenti.units.it" class="team-member-btn primary">
                                 ✉️ Email
                             </a>
-                            <a href="https://www.cienciavitae.pt3D1FA9F6-D11E" class="team-member-btn secondary" target="_blank">
-                                 CV
+                            <a href="https://www.cienciavitae.pt/3D1FA9F6-D11E" class="team-member-btn secondary" target="_blank">
+                                📄 CV
                             </a>
                         </div>
                     </div>
@@ -720,7 +731,7 @@
                                 ✉️ Email
                             </a>
                             <a href="https://www.cienciavitae.pt/031D-81D7-540F" class="team-member-btn secondary" target="_blank">
-                                 CV
+                                📄 CV
                             </a>
                         </div>
                     </div>
@@ -734,7 +745,7 @@
                                 ✉️ Email
                             </a>
                             <a href="https://www.cienciavitae.pt/B915-D668-DF0C" class="team-member-btn secondary" target="_blank">
-                                 CV
+                                📄 CV
                             </a>
                         </div>
                     </div>
@@ -748,7 +759,7 @@
                                 ✉️ Email
                             </a>
                             <a href="https://www.cienciavitae.pt/7610-D953-A10F" class="team-member-btn secondary" target="_blank">
-                                 CV
+                                📄 CV
                             </a>
                         </div>
                     </div>
@@ -761,8 +772,8 @@
                             <a href="mailto:tvaraujo@fc.ul.pt" class="team-member-btn primary">
                                 ✉️ Email
                             </a>
-                            <a href="https://www.cienciavitae.ptA71D-9F17-085F" class="team-member-btn secondary" target="_blank">
-                                 CV
+                            <a href="https://www.cienciavitae.pt/A71D-9F17-085F" class="team-member-btn secondary" target="_blank">
+                                📄 CV
                             </a>
                         </div>
                     </div>
@@ -776,7 +787,7 @@
                                 ✉️ Email
                             </a>
                             <a href="https://www.cienciavitae.pt/931E-D521-2022" class="team-member-btn secondary" target="_blank">
-                                 CV
+                                📄 CV
                             </a>
                         </div>
                     </div>
@@ -819,10 +830,10 @@
 
                 <div class="publication-item fade-in">
                     <div class="publication-title">
-                        <a href="https://doi.org/10.1000/example1" target="_blank">RNA-binding proteins in gene expression regulation: mechanisms and therapeutic implications</a>
+                        <a href="https://doi.org/10.1000/example4" target="_blank">Novel insights into RNA metabolism and disease</a>
                     </div>
                     <div class="publication-authors">Gama-Carvalho, M., Silva, A., Santos, R.</div>
-                    <div class="publication-journal">Journal of Molecular Biology • 2024</div>
+                    <div class="publication-journal">Cell Reports • 2023</div>
                 </div>
             </div>
         </div>
@@ -864,7 +875,7 @@
                     <div class="contact-item">
                         <div class="contact-icon">📄</div>
                         <div class="contact-text">
-                            <a href="https://www.researchgate.net/lab/RNA-Systems-Biology-Lab-Margarida-Gama-Carvalho"target="_blank">Lab's ResearchGate</a><br>
+                            <a href="https://www.researchgate.net/lab/RNA-Systems-Biology-Lab-Margarida-Gama-Carvalho" target="_blank">Lab's ResearchGate</a><br>
                         </div>
                     </div>
                     
@@ -921,4 +932,3 @@
     </script>
 </body>
 </html>
-                
